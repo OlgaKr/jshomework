@@ -3,6 +3,7 @@ let services = {
   "Гоління": "300 грн",
   "Миття голови": "100 грн",
 
+//Створити метод minPrice(), який повертає мінімальну ціну.
  minPrice() {
     let min = parseFloat(services.Стрижка);
     for (let key in services) {
@@ -13,6 +14,7 @@ let services = {
     return min + " грн";
   },
 
+//Створити метод maxPrice(), який повертає максимальну ціну.
    maxPrice() {
     let max = 0;
     for (let key in services) {
@@ -23,6 +25,7 @@ let services = {
     return max + " грн";
   },
 
+  //Створити метод price(), який обчислює та повертає загальну вартість наданих послуг
    price() {
     let sum = 0;
     for (let key in services) {
@@ -32,6 +35,7 @@ let services = {
     return sum + " грн";
   },
 
+  //Послуги можуть додаватися по ходу роботи
     set addService(data) {
     let parts = data.split(":");
     let name = parts[0];
@@ -42,6 +46,6 @@ let services = {
 
 services.addService = "Нарощення вій: 50 грн";
 
-console.log("Мінімальна ціна:", services.minPrice());
-console.log("Максимальна ціна:", services.maxPrice());
-console.log("Загальна сума:", services.price());
+console.log("Мінімальна ціна: " + services.minPrice());
+console.log("Максимальна ціна: " + services.maxPrice());
+console.log("Загальна сума: " + services.price());
