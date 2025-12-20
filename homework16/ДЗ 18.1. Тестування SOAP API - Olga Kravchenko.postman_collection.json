@@ -1,0 +1,181 @@
+{
+	"info": {
+		"_postman_id": "70bf114b-dad3-4895-90a6-61da9777d255",
+		"name": "ДЗ 18.1. Тестування SOAP API - Olga Kravchenko",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50460594",
+		"_collection_link": "https://ellagreen200-2914380.postman.co/workspace/dae1c0da-f688-4e7e-812f-7f29996fe26c/collection/50460594-70bf114b-dad3-4895-90a6-61da9777d255?action=share&source=collection_link&creator=50460594"
+	},
+	"item": [
+		{
+			"name": "Is Valid ISBN10 Number",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is < 1000 ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type header is present\", function () {\r",
+							"  pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type contains xml\", function () {\r",
+							"  pm.expect(pm.response.headers.get(\"Content-Type\").toLowerCase()).to.include(\"xml\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body is not empty\", function () {\r",
+							"  pm.expect(pm.response.text()).to.not.be.empty;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"SOAP Envelope is present\", function () {\r",
+							"  pm.expect(pm.response.text()).to.include(\"Envelope\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"SOAP Body is present\", function () {\r",
+							"  pm.expect(pm.response.text()).to.include(\"Body\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"ISBN10 response tag is present\", function () {\r",
+							"  pm.expect(pm.response.text()).to.include(\"<m:IsValidISBN10Response\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"ISBN10 result tag is present\", function () {\r",
+							"  pm.expect(pm.response.text()).to.match(/<m:IsValidISBN10Result>/i);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"ISBN10 result is true\", function () {\r",
+							"  const body = pm.response.text().toLowerCase();\r",
+							"  pm.expect(body.includes(\">true<\")).to.be.true;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <IsValidISBN10 xmlns=\"http://webservices.daehosting.com/ISBN\">\n      <sISBN>0-19-852663-6</sISBN>\n    </IsValidISBN10>\n  </soap:Body>\n</soap:Envelope>"
+				},
+				"url": {
+					"raw": "http://webservices.daehosting.com/services/isbnservice.wso",
+					"protocol": "http",
+					"host": [
+						"webservices",
+						"daehosting",
+						"com"
+					],
+					"path": [
+						"services",
+						"isbnservice.wso"
+					]
+				},
+				"description": "The test is done by calculation on the first 9 digits and compare the result with the checksum number at the end. You have to pass a 10 digits number or 8 digits and an X."
+			},
+			"response": []
+		},
+		{
+			"name": "Is Valid ISBN13 Number",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is < 1000 ms\", function () {\r",
+							"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type header is present\", function () {\r",
+							"  pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type contains xml\", function () {\r",
+							"  pm.expect(pm.response.headers.get(\"Content-Type\").toLowerCase()).to.include(\"xml\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body is not empty\", function () {\r",
+							"  pm.expect(pm.response.text()).to.not.be.empty;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"SOAP Envelope is present\", function () {\r",
+							"  pm.expect(pm.response.text()).to.include(\"Envelope\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"SOAP Body is present\", function () {\r",
+							"  pm.expect(pm.response.text()).to.include(\"Body\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"ISBN13 response tag is present\", function () {\r",
+							"  pm.expect(pm.response.text()).to.include(\"<m:IsValidISBN13Response\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"ISBN13 result tag is present\", function () {\r",
+							"  pm.expect(pm.response.text()).to.match(/<m:IsValidISBN13Result>/i);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"ISBN13 result is true\", function () {\r",
+							"  const body = pm.response.text().toLowerCase();\r",
+							"  pm.expect(body.includes(\">true<\")).to.be.true;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml; charset=utf-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <IsValidISBN13 xmlns=\"http://webservices.daehosting.com/ISBN\">\n      <sISBN>978-1-4612-9090-2</sISBN>\n    </IsValidISBN13>\n  </soap:Body>\n</soap:Envelope>"
+				},
+				"url": {
+					"raw": "http://webservices.daehosting.com/services/isbnservice.wso",
+					"protocol": "http",
+					"host": [
+						"webservices",
+						"daehosting",
+						"com"
+					],
+					"path": [
+						"services",
+						"isbnservice.wso"
+					]
+				},
+				"description": "The test is done by calculation on the first 12 digits and compare the result with the checksum number at the end. You have to pass a 13 digits number."
+			},
+			"response": []
+		}
+	]
+}
